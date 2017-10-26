@@ -1,0 +1,54 @@
+{{define "content"}}
+<div class="row">
+    <div class="col-sm">
+        <h1>Lottery Tickets</h1>
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th># Game Types</th>
+            <th># Draws</th>
+            <th># Days</th>
+            </thead>
+            <tbody>
+            {{range .Result}}
+                {{if eq .Type "lottery_ticket"}}
+                <tr>
+                    <td><a href="/lottery/{{.Key}}">{{.Name}}</a></td>
+                    <td>{{len .GameTypes}}</td>
+                    <td>{{len .Draws}}</td>
+                    <td>{{len .Days}}</td>
+                </tr>
+                {{end}}
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <h1>Raffle Tickets</h1>
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th># Offers</th>
+            <th>Draw Name</th>
+            <th>Draw #</th>
+            <th>Draw Date</th>
+            </thead>
+            <tbody>
+            {{range .Result}}
+                {{if eq .Type "raffle_ticket"}}
+                <tr>
+                    <td><a href="/raffle/{{.Key}}">{{.Name}}</a></td>
+                    <td>{{len .Draw.Offers}}</td>
+                    <td>{{.Draw.Name}}</td>
+                    <td>{{.Draw.DrawNumber}}</td>
+                    <td>{{prettyDate .Draw.DrawDate}}</td>
+                </tr>
+                {{end}}
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{end}}

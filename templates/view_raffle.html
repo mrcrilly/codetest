@@ -1,0 +1,66 @@
+{{define "content"}}
+<div class="row">
+    <h2>
+        {{.Name}}
+        <small class="text-muted">{{prettyCurrency .Draw.Prize.Value.Amount}}</small>
+    </h2>
+</div>
+<br/><br/>
+<div class="row">
+    <div class="col-sm">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">{{.Lottery.Name}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{.Lottery.Type}}</h6>
+                <p class="card-text">{{.Lottery.Desc}}</p>
+                <a href="{{.Lottery.PlayURL}}" class="card-link">Click to Play!</a>
+            </div>
+        </div>
+        <p><a href="{{.Draw.TermsAndConditionsURL}}">Terms and Conditions Apply</a></p>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-sm">
+        <h3>
+            {{.Draw.Prize.Content.SalesPitchHeading1}}
+            <small class="text-muted">{{.Draw.Prize.Content.SalesPitchSubHeading1}}</small>
+        </h3>
+        <p>{{.Draw.Prize.Content.Paragraph1}}</p>
+        <p>{{.Draw.Prize.Content.Paragraph2}}</p>
+        <p>{{.Draw.Prize.Content.Paragraph3}}</p>
+        <h3>
+            {{.Draw.Prize.Content.SalesPitchHeading2}}
+            <small class="text-muted">{{.Draw.Prize.Content.SalesPitchSubHeading2}}</small>
+        </h3>
+        <ul>
+        {{range .Draw.Prize.Content.Features}}
+            <li>{{.}}</li>
+        {{end}}
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <h3>Offers</h3>
+        <table class="table">
+            <thead>
+            <th>Name</th>
+            <th># of Tickets</th>
+            <th>Price</th>
+            <th>Price Per Ticket</th>
+            </thead>
+            <tbody>
+            {{range .Draw.Offers}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{.NumTickets}}</td>
+                <td>{{prettyCurrency .Price.Amount}}</td>
+                <td>{{prettyCurrency .PricePerTicket.Amount}}</td>
+            </tr>
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{end}}
